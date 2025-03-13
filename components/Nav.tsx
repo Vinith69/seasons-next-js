@@ -9,7 +9,7 @@ const Nav = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="w-full py-8 px-[10vw]">
+    <nav className="w-full pt-4 pb-14 md:py-8 px-[10vw]">
       {/* Top Row */}
       <div className="flex items-center justify-between">
         {/* Logo */}
@@ -64,15 +64,15 @@ const Nav = () => {
           <div className="flex items-center space-x-4 lg:hidden">
             <Button hrefPath="#" />
             <button className="focus:outline-none" onClick={() => setIsOpen(!isOpen)}>
-              {isOpen ? (
-                <svg className="w-9 h-9" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
-                </svg>
-              ) : (
-                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-                </svg>
-              )}
+              <svg
+                className="w-8 h-8 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+              </svg>
             </button>
           </div>
         </div>
@@ -81,7 +81,7 @@ const Nav = () => {
       {/* Mobile Side Panel: Only for md and sm */}
       <div className="lg:hidden">
         <div
-          className={`fixed top-0 right-0 h-full w-1/3 bg-white text-black shadow-lg transform transition-transform duration-300 ${
+          className={`fixed top-0 right-0 h-full w-3/4 bg-white text-black shadow-lg transform transition-transform duration-300 ${
             isOpen ? "translate-x-0" : "translate-x-full"
           }`}
         >
