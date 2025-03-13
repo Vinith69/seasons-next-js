@@ -1,6 +1,7 @@
 import Nav from "@/components/Nav";
 import Image from "next/image";
 import "./homepage.css";
+import SearchBox from "@/components/SearchBox";
 
 export default function Home() {
   return (
@@ -10,11 +11,11 @@ export default function Home() {
         data-background="url(https://seasons.jdprojects.in/assets/img/hero/tu/banner.jpg)"
       >
         <Nav />
-        <div className="flex flex-col items-center justify-center text-center self-center my-auto min-h-[90vh] py-[20vh]">
+        <div className="flex flex-col items-center justify-center text-center self-center my-auto min-h-[100vh] py-[20vh]">
           <h2 className="text-white text-6xl font-bold mb-2">Where Every Journey</h2>
           <h3 className="text-white text-5xl font-bold mb-2">Become an Adventure</h3>
 
-          <div className="flex items-end mt-4 space-x-2">
+          <div className="flex items-end mt-4 space-x-3 ml-4">
             <Image src={`https://seasons.jdprojects.in/assets/img/hero/tu/avatar.png`} alt="avatar" width={230} height={50} />
             <p className="capitalize text-white text-[18px] font-bold  underline text-start">
               35k people booked <br /> Dream place
@@ -27,7 +28,8 @@ export default function Home() {
             </svg>
           </div>
 
-          <div className="bg-white rounded-full w-[80vw] h-18 mt-8"></div>
+          {/* <div className="bg-white rounded-full w-[80vw] h-18 mt-8"></div> */}
+          <SearchBox sectionClass="mt-6 " />
         </div>
       </section>
       <main>Hi</main>
