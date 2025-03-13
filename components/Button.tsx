@@ -7,7 +7,7 @@ type ButtonProps = {
 const Button = ({ hrefPath }: ButtonProps) => {
   return (
     <Link href={hrefPath}>
-      <button className="text-white cursor-pointer rounded-sm text-[15px] font-bold flex justify-center items-center w-22 h-10 bg-[#FFFFFF30] hover:bg-white hover:text-black transition-all duration-300 hover:shadow-sm">
+      <button className="text-white cursor-pointer rounded-lg  text-[15px] font-bold flex justify-center items-center w-22 h-10 bg-[#FFFFFF30] hover:bg-white hover:text-black transition-all duration-300 hover:shadow-sm">
         <span className="mx-1">
           <svg width={14} height={14} viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path

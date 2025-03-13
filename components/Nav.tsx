@@ -9,7 +9,7 @@ const Nav = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="w-full py-4 px-[10vw]">
+    <nav className="w-full py-8 px-[10vw]">
       {/* Top Row */}
       <div className="flex items-center justify-between">
         {/* Logo */}
@@ -18,7 +18,7 @@ const Nav = () => {
         </div>
 
         {/* Desktop Nav Links: visible on lg */}
-        <ul className="hidden lg:flex space-x-6 text-[15px]">
+        <ul className="hidden lg:flex space-x-6 text-[15px] text-white">
           <li>
             <Link href="/">Home</Link>
           </li>
@@ -39,9 +39,9 @@ const Nav = () => {
         {/* Right Section */}
         <div className="flex items-center space-x-4">
           {/* For lg screens, show call section with login btn */}
-          <div className="hidden lg:flex items-center space-x-2">
-            <div className="flex items-center space-x-2">
-              <div className="flex items-center justify-center w-8 h-8 rounded-full shadow-md">
+          <div className="hidden lg:flex items-center space-x-4 ">
+            <div className="flex items-center space-x-2 ">
+              <div className="flex items-center justify-center w-8 h-8 bg-white rounded-full shadow-md">
                 <svg className="w-6 h-6" viewBox="0 0 21 21" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                   <path
                     fillRule="evenodd"
@@ -50,7 +50,7 @@ const Nav = () => {
                   />
                 </svg>
               </div>
-              <div className="flex flex-col">
+              <div className="flex flex-col text-white ">
                 <span className="text-xs">Call Us:</span>
                 <Link href="tel:+913333333" className="text-base font-bold">
                   +91-3333333456
