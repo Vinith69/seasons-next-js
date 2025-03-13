@@ -9,7 +9,7 @@ const Nav = () => {
   const [isOpen, setIsOpen] = useState<Boolean>(false);
   return (
     // bg-gray-600
-    <nav className="flex justify-between items-center py-8 px-[10vw] w-full">
+    <nav className="flex justify-between items-center py-4 px-[10vw] w-full">
       {/* left section logo hamburger and navlinks */}
       <div className="flex items-center ">
         <div className="logo mx-4 flex">
