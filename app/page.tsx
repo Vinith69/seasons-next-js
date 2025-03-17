@@ -12,7 +12,7 @@ export default function Home() {
         data-background="url(https://seasons.jdprojects.in/assets/img/hero/tu/banner.jpg)"
       >
         <Nav />
-        <div className="flex flex-col items-center justify-center text-center self-center my-auto md:min-h-[90vh] md:py-[20vh]">
+        <div className="flex flex-col items-center justify-center text-center self-center my-auto min-h-[100vh] md:min-h-[90vh] md:py-[20vh]">
           <h2 className="text-white text-3xl md:text-6xl font-bold mb-2">Where Every Journey</h2>
           <h3 className="text-white text-2xl md:text-5xl font-bold mb-2">Become an Adventure</h3>
 

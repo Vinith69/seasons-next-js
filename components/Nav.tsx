@@ -2,46 +2,89 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from "./Button";
 
 const Nav = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
-    <nav className="w-full pt-4 pb-14 md:py-8 px-[10vw]">
-      {/* Top Row */}
-      <div className="flex items-center justify-between">
+    <nav
+      className={`w-full fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled ? "bg-white shadow-md text-black py-4" : "bg-transparent text-white py-6"
+      }`}
+    >
+      <div className="flex items-center justify-between px-[10vw]">
         {/* Logo */}
         <div className="flex items-center">
-          <Image width={120} height={180} src="https://seasons.jdprojects.in/assets/img/logo/logo-white.png" alt="logo" />
+          <Image
+            width={120}
+            height={180}
+            src={
+              isScrolled
+                ? "https://seasons.jdprojects.in/assets/img/logo/logo-green.png"
+                : "https://seasons.jdprojects.in/assets/img/logo/logo-white.png"
+            }
+            alt="logo"
+            // className={`${isScrolled ? "brightness-0 invert" : ""}`} // Makes logo visible on white background
+          />
         </div>
 
-        {/* Desktop Nav Links: visible on lg */}
-        <ul className="hidden lg:flex space-x-6 text-[15px] text-white">
+        {/* Desktop Navigation */}
+        <ul className="hidden lg:flex space-x-6 text-[15px]">
           <li>
-            <Link href="/">Home</Link>
+            <Link href="/" className={`${isScrolled ? "text-black" : "text-white"}`}>
+              Home
+            </Link>
           </li>
           <li>
-            <Link href="/features">Features</Link>
+            <Link href="/features" className={`${isScrolled ? "text-black" : "text-white"}`}>
+              Features
+            </Link>
           </li>
           <li>
-            <Link href="/pages">Pages</Link>
+            <Link href="/pages" className={`${isScrolled ? "text-black" : "text-white"}`}>
+              Pages
+            </Link>
           </li>
           <li>
-            <Link href="/blogs">Blogs</Link>
+            <Link href="/blogs" className={`${isScrolled ? "text-black" : "text-white"}`}>
+              Blogs
+            </Link>
           </li>
           <li>
-            <Link href="/contact">Contact</Link>
+            <Link href="/contact" className={`${isScrolled ? "text-black" : "text-white"}`}>
+              Contact
+            </Link>
           </li>
         </ul>
 
         {/* Right Section */}
         <div className="flex items-center space-x-4">
-          {/* For lg screens, show call section with login btn */}
-          <div className="hidden lg:flex items-center space-x-4 ">
-            <div className="flex items-center space-x-2 ">
-              <div className="flex items-center justify-center w-8 h-8 bg-white rounded-full shadow-md">
+          {/* Call and Button (Desktop) */}
+          <div className="hidden lg:flex items-center space-x-4">
+            <div className="flex items-center space-x-2">
+              <div
+                className={`flex items-center justify-center w-8 h-8 rounded-full shadow-md ${
+                  isScrolled ? "bg-black text-white" : "bg-white text-black"
+                }`}
+              >
                 <svg className="w-6 h-6" viewBox="0 0 21 21" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                   <path
                     fillRule="evenodd"
@@ -50,27 +93,21 @@ const Nav = () => {
                   />
                 </svg>
               </div>
-              <div className="flex flex-col text-white ">
+              <div className={`flex flex-col ${isScrolled ? "text-black" : "text-white"}`}>
                 <span className="text-xs">Call Us:</span>
                 <Link href="tel:+913333333" className="text-base font-bold">
                   +91-3333333456
                 </Link>
               </div>
             </div>
-            <Button hrefPath="#" />
+            <Button hrefPath="#" isScrolled={isScrolled} />
           </div>
 
-          {/* For md and sm screens, show only login btn and hamburger menu */}
+          {/* Mobile Hamburger Menu */}
           <div className="flex items-center space-x-4 lg:hidden">
-            <Button hrefPath="#" />
+            <Button hrefPath="#" isScrolled={isScrolled} />
             <button className="focus:outline-none" onClick={() => setIsOpen(!isOpen)}>
-              <svg
-                className="w-8 h-8 text-white"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7"></path>
               </svg>
             </button>
@@ -78,7 +115,7 @@ const Nav = () => {
         </div>
       </div>
 
-      {/* Mobile Side Panel: Only for md and sm */}
+      {/* Mobile Navigation */}
       <div className="lg:hidden">
         <div
           className={`fixed top-0 right-0 h-full w-3/4 bg-white text-black shadow-lg transform transition-transform duration-300 ${

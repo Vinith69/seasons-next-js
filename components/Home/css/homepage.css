@@ -2,7 +2,7 @@
   background-image: url("https://seasons.jdprojects.in/assets/img/about/su/right-shape.png");
   background-size: 10%;
   background-position: right top;
-  background-repeat: no-repeat;
+  background-repeat: repeat-y;
   padding: 50px; /* Ensure content has enough padding */
 }
 
