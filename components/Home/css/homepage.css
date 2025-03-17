@@ -1,0 +1,25 @@
+.aboutSection {
+  background-image: url("https://seasons.jdprojects.in/assets/img/about/su/right-shape.png");
+  background-size: 10%;
+  background-position: right top;
+  background-repeat: no-repeat;
+  padding: 50px; /* Ensure content has enough padding */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .aboutSection {
+    background-size: 20%; /* Reduce size on smaller screens */
+    background-position: right bottom; /* Adjust position */
+    background-repeat: no-repeat;
+  }
+}
+
+@media (max-width: 480px) {
+  .aboutSection {
+    background-size: 30%; /* Further reduce size for very small screens */
+    background-position: 125% center; /* Keep it aligned properly */
+    padding: 30px; /* Reduce padding for small screens */
+    background-repeat: repeat-y;
+  }
+}

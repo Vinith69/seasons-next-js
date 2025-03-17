@@ -2,6 +2,7 @@ import Nav from "@/components/Nav";
 import Image from "next/image";
 import "./homepage.css";
 import SearchBox from "@/components/SearchBox";
+import AboutUs from "@/components/Home/AboutUs";
 
 export default function Home() {
   return (
@@ -39,7 +40,9 @@ export default function Home() {
           <SearchBox sectionClass="mt-6 mb-18" />
         </div>
       </section>
-      <main>Hi</main>
+      <main className="">
+        <AboutUs />
+      </main>
     </>
   );
 }
