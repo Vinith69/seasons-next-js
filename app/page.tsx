@@ -3,6 +3,7 @@ import Image from "next/image";
 import "./homepage.css";
 import SearchBox from "@/components/SearchBox";
 import AboutUs from "@/components/Home/AboutUs";
+import HotelList from "@/components/Home/HotelList";
 
 export default function Home() {
   return (
@@ -42,6 +43,7 @@ export default function Home() {
       </section>
       <main className="">
         <AboutUs />
+        <HotelList />
       </main>
     </>
   );

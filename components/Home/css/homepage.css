@@ -23,3 +23,25 @@
     background-repeat: repeat-y;
   }
 }
+
+/* ************************************************** Hotel section ************************************************* */
+/* @import url("https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap"); */
+
+.hotelListSection {
+  background-image: url("https://seasons.jdprojects.in/assets/img/listing/about-shape.png"),
+    url("https://seasons.jdprojects.in/assets/img/listing/about-shape-2.png"),
+    url("https://seasons.jdprojects.in/assets/img/listing/about-shape-3.png");
+
+  background-size: 20%, 10%, 15%;
+  background-position: right top, right top, left bottom;
+  background-repeat: no-repeat, no-repeat, no-repeat;
+
+  /* padding: 50px; */
+}
+
+/* .hotelListSection h5 {
+  font-family: "Caveat", cursive;
+  font-style: italic;
+} */
+
+/* ************************************************** Hotel section end************************************************* */
