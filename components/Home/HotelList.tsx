@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import "./css/homepage.css";
 
 const tabs = [
@@ -26,71 +26,105 @@ export default function HotelList() {
 function TabComponent() {
   const [activeTab, setActiveTab] = useState("Tour");
 
-  // Slicing for your layout
+  // For multi-row layout
   const firstThree = tabs.slice(0, 3);
   const lastThree = tabs.slice(3, 6);
-
   const firstFour = tabs.slice(0, 4);
   const lastTwo = tabs.slice(4, 6);
 
-  // Helper to render a row of tabs
-  const renderTabs = (items: typeof tabs) =>
-    items.map((tab) => (
+  // Find the index of the active tab (0..5)
+  const activeIndex = useMemo(() => tabs.findIndex((t) => t.name === activeTab), [activeTab]);
+
+  /**
+   * Renders tabs with their own border for mobile & tablet.
+   * Each button gets a purple border if active, gray border if inactive.
+   */
+  const renderTabsWithBorder = (items: typeof tabs) =>
+    items.map((tab) => {
+      const isActive = tab.name === activeTab;
+      return (
+        <button
+          key={tab.name}
+          onClick={() => setActiveTab(tab.name)}
+          className={`flex items-center justify-center 
+            cursor-pointer py-2 transition-all duration-300
+            ${
+              isActive
+                ? "text-purple-600 border-b-[3px] border-purple-600 font-bold"
+                : "text-gray-500 border-b-[2px] border-gray-300 hover:text-purple-600"
+            }`}
+        >
+          <span className="mr-1">{tab.icon}</span>
+          <span>{tab.name}</span>
+        </button>
+      );
+    });
+
+  /**
+   * Desktop: Single row with a sliding highlight bar.
+   * Each button has no bottom border; the bar is shared.
+   */
+  const renderDesktopTabs = tabs.map((tab) => {
+    const isActive = tab.name === activeTab;
+    return (
       <button
         key={tab.name}
         onClick={() => setActiveTab(tab.name)}
-        className={`
-          relative flex items-center justify-center py-2 px-2 
-          cursor-pointer transition-all duration-300
-          text-sm md:text-base 
-          ${
-            activeTab === tab.name
-              ? "text-purple-600 font-bold" // Active text color
-              : "text-gray-500 hover:text-purple-600"
-          }
-          `}
+        className={`flex-1 flex items-center justify-center 
+          cursor-pointer py-3 transition-colors duration-300
+          ${isActive ? "text-purple-600 font-bold" : "text-gray-500 hover:text-purple-600"}`}
       >
-        {/* Icon + Label */}
         <span className="mr-1">{tab.icon}</span>
         <span>{tab.name}</span>
-
-        {/* Active underline (pseudo-element) */}
-        {activeTab === tab.name && (
-          <span
-            className="
-              absolute bottom-0 left-0 w-full h-[2px] 
-              bg-purple-600
-            "
-          />
-        )}
       </button>
-    ));
+    );
+  });
 
   return (
     <>
-      {/* MOBILE (< md): 2 rows, each with a single bottom border */}
+      {/* MOBILE (< md): 2 rows (3 + 3) */}
       <div className="block md:hidden">
         <div className="flex flex-col items-center">
-          {/* First row (3 items) */}
-          <div className="grid grid-cols-3 w-5/6 border-b border-gray-300">{renderTabs(firstThree)}</div>
-          {/* Second row (3 items) */}
-          <div className="grid grid-cols-3 w-full border-b border-gray-300 mt-2">{renderTabs(lastThree)}</div>
+          <div className="grid grid-cols-3 w-5/6 gap-0 mb-2">{renderTabsWithBorder(firstThree)}</div>
+          <div className="grid grid-cols-3 w-full gap-0">{renderTabsWithBorder(lastThree)}</div>
         </div>
       </div>
 
-      {/* TABLET (md to < lg): 2 rows with single bottom border each */}
+      {/* TABLET (>= md and < lg): 2 rows (4 + 2) */}
       <div className="hidden md:block lg:hidden">
         <div className="flex flex-col items-center">
-          {/* First row (4 items) */}
-          <div className="grid grid-cols-4 border-b border-gray-300">{renderTabs(firstFour)}</div>
-          {/* Second row (2 items) */}
-          <div className="grid grid-cols-2 border-b border-gray-300 mt-2 w-1/2">{renderTabs(lastTwo)}</div>
+          <div className="grid grid-cols-4 gap-0 mb-4">{renderTabsWithBorder(firstFour)}</div>
+          <div className="grid grid-cols-2 gap-0">{renderTabsWithBorder(lastTwo)}</div>
         </div>
       </div>
 
-      {/* DESKTOP (>= lg): single row, 6 equal columns, single border */}
+      {/* DESKTOP (>= lg): single row with a sliding + expanding purple bar */}
       <div className="hidden lg:block">
-        <div className="grid grid-cols-6 border-b border-gray-300 max-w-4xl mx-auto">{renderTabs(tabs)}</div>
+        {/* 
+          1) A container with border-b so there's a baseline.
+          2) We'll place a .borders <span> absolutely at bottom. 
+        */}
+        <div className="relative w-full max-w-3xl mx-auto border-b border-gray-300">
+          {/* The row of tabs */}
+          <div className="flex">{renderDesktopTabs}</div>
+
+          {/* 
+            The sliding + expanding bar. 
+            - width: 16.6667% (1/6) so each tab is the same fraction
+            - transform: translateX( activeIndex * 100% ) to move horizontally
+            - inside, a .borders that animates from 0 to 100% scale
+          */}
+          <div
+            className="absolute bottom-0 left-0 transition-transform duration-300"
+            style={{
+              width: "16.6667%",
+              transform: `translateX(${activeIndex * 100}%)`,
+            }}
+          >
+            {/* This .borders spans from 0 to 100% using a keyframe */}
+            <span className="borders block h-[4px] bg-purple-600 origin-left animate-grow" />
+          </div>
+        </div>
       </div>
     </>
   );
