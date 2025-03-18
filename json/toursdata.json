@@ -1,0 +1,142 @@
+[
+    {
+        "category": "Tour",
+        "title": "When You Visit The Eternal Dubai City",
+        "location": "Dubai, Emirates",
+        "days": 5,
+        "oldPrice": 299,
+        "newPrice": 149,
+        "reviews": 5,
+        "image": "https://seasons.jdprojects.in/assets/img/listing/listing-2.jpg"
+    },
+    {
+        "category": "Tour",
+        "title": "Amazing Paris Experience",
+        "location": "Paris, France",
+        "days": 7,
+        "oldPrice": 399,
+        "newPrice": 299,
+        "reviews": 10,
+        "image": "https://seasons.jdprojects.in/assets/img/listing/listing-2.jpg"
+    },
+    {
+        "category": "Hotel",
+        "title": "Luxury Stay at NYC",
+        "location": "New York, USA",
+        "days": 3,
+        "oldPrice": 499,
+        "newPrice": 359,
+        "reviews": 12,
+        "image": "https://seasons.jdprojects.in/assets/img/listing/listing-2.jpg"
+    },
+    {
+        "category": "Restaurant",
+        "title": "Gourmet Delight in Rome",
+        "location": "Rome, Italy",
+        "days": 2,
+        "oldPrice": 150,
+        "newPrice": 99,
+        "reviews": 8,
+        "image": "https://seasons.jdprojects.in/assets/img/listing/listing-2.jpg"
+    },
+    {
+        "category": "Rental",
+        "title": "Economy Car Rental in Berlin",
+        "location": "Berlin, Germany",
+        "days": 1,
+        "oldPrice": 80,
+        "newPrice": 60,
+        "reviews": 15,
+        "image": "https://seasons.jdprojects.in/assets/img/listing/listing-2.jpg"
+    },
+    {
+        "category": "Activity",
+        "title": "City Bike Tour in Amsterdam",
+        "location": "Amsterdam, Netherlands",
+        "days": 1,
+        "oldPrice": 50,
+        "newPrice": 35,
+        "reviews": 20,
+        "image": "https://seasons.jdprojects.in/assets/img/listing/listing-2.jpg"
+    },
+    {
+        "category": "Car Rental",
+        "title": "Luxury Car Rental in Los Angeles",
+        "location": "Los Angeles, USA",
+        "days": 2,
+        "oldPrice": 600,
+        "newPrice": 450,
+        "reviews": 18,
+        "image": "https://seasons.jdprojects.in/assets/img/listing/listing-2.jpg"
+    },
+    {
+        "category": "Tour",
+        "title": "Safari Adventure in Kenya",
+        "location": "Nairobi, Kenya",
+        "days": 6,
+        "oldPrice": 700,
+        "newPrice": 500,
+        "reviews": 22,
+        "image": "https://seasons.jdprojects.in/assets/img/listing/listing-2.jpg"
+    },
+    {
+        "category": "Hotel",
+        "title": "Boutique Hotel in Tokyo",
+        "location": "Tokyo, Japan",
+        "days": 4,
+        "oldPrice": 550,
+        "newPrice": 420,
+        "reviews": 14,
+        "image": "https://seasons.jdprojects.in/assets/img/listing/listing-2.jpg"
+    },
+    {
+        "category": "Restaurant",
+        "title": "Traditional Sushi Experience",
+        "location": "Osaka, Japan",
+        "days": 1,
+        "oldPrice": 120,
+        "newPrice": 85,
+        "reviews": 9,
+        "image": "https://seasons.jdprojects.in/assets/img/listing/listing-2.jpg"
+    },
+    {
+        "category": "Rental",
+        "title": "SUV Rental for Family Trip",
+        "location": "Sydney, Australia",
+        "days": 3,
+        "oldPrice": 300,
+        "newPrice": 250,
+        "reviews": 11,
+        "image": "https://seasons.jdprojects.in/assets/img/listing/listing-2.jpg"
+    },
+    {
+        "category": "Activity",
+        "title": "Hot Air Balloon Ride",
+        "location": "Cappadocia, Turkey",
+        "days": 1,
+        "oldPrice": 350,
+        "newPrice": 275,
+        "reviews": 16,
+        "image": "https://seasons.jdprojects.in/assets/img/listing/listing-2.jpg"
+    },
+    {
+        "category": "Car Rental",
+        "title": "Convertible Car Rental",
+        "location": "Miami, USA",
+        "days": 2,
+        "oldPrice": 400,
+        "newPrice": 320,
+        "reviews": 13,
+        "image": "https://seasons.jdprojects.in/assets/img/listing/listing-2.jpg"
+    },
+    {
+        "category": "Tour",
+        "title": "Historic Tour of Athens",
+        "location": "Athens, Greece",
+        "days": 2,
+        "oldPrice": 200,
+        "newPrice": 150,
+        "reviews": 7,
+        "image": "https://seasons.jdprojects.in/assets/img/listing/listing-2.jpg"
+    }
+]

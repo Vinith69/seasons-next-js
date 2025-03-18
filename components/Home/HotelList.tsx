@@ -14,59 +14,7 @@ const tabs = [
 ];
 
 /** 2) Some sample card data. Each has a "category" that matches one of the tabs. */
-const toursData = [
-  {
-    category: "Tour",
-    title: "When You Visit The Eternal Dubai City",
-    location: "Dubai, Emirates",
-    days: 5,
-    oldPrice: 299,
-    newPrice: 149,
-    reviews: 5,
-    image: "https://seasons.jdprojects.in/assets/img/listing/listing-2.jpg",
-  },
-  {
-    category: "Tour",
-    title: "Amazing Paris Experience",
-    location: "Paris, France",
-    days: 7,
-    oldPrice: 399,
-    newPrice: 299,
-    reviews: 10,
-    image: "https://seasons.jdprojects.in/assets/img/listing/listing-2.jpg",
-  },
-  {
-    category: "Hotel",
-    title: "Luxury Stay at NYC",
-    location: "New York, USA",
-    days: 3,
-    oldPrice: 499,
-    newPrice: 359,
-    reviews: 12,
-    image: "https://seasons.jdprojects.in/assets/img/listing/listing-2.jpg",
-  },
-  {
-    category: "Restaurant",
-    title: "Luxury Stay at NYC",
-    location: "New York, USA",
-    days: 3,
-    oldPrice: 499,
-    newPrice: 359,
-    reviews: 12,
-    image: "https://seasons.jdprojects.in/assets/img/listing/listing-2.jpg",
-  },
-  {
-    category: "Rental",
-    title: "Luxury Stay at NYC",
-    location: "New York, USA",
-    days: 3,
-    oldPrice: 499,
-    newPrice: 359,
-    reviews: 12,
-    image: "https://seasons.jdprojects.in/assets/img/listing/listing-2.jpg",
-  },
-  // ... add more items with categories like "Restaurant", "Rental", "Activity", "Car Rental"
-];
+import toursData from "../../json/toursdata.json";
 
 export default function HotelList() {
   /** 3) Track the active tab, defaulting to "Tour" */
@@ -77,19 +25,21 @@ export default function HotelList() {
 
   return (
     <section className="hotelListSection px-4 py-4 w-full bg-[#f8f8f8] text-[#020615]">
-      <div className="text-center mb-6">
-        <h5 className="capitalize font-bold text-lg text-[#560ce3] font-[caveat] mb-4">Most Popular Tour Packages</h5>
-        <h2 className="text-4xl font-bold mb-4">Something Amazing Waiting For You</h2>
-      </div>
+      <div className="max-w-5xl mx-auto">
+        <div className="text-center mb-6">
+          <h5 className="capitalize font-bold text-lg text-[#560ce3] font-[caveat] mb-4">Most Popular Tour Packages</h5>
+          <h2 className="text-4xl font-bold mb-4">Something Amazing Waiting For You</h2>
+        </div>
 
-      {/* 5) The existing tab component: no changes to its structure or UI */}
-      <TabComponent activeTab={activeTab} setActiveTab={setActiveTab} />
+        {/* Existing Tab Component */}
+        <TabComponent activeTab={activeTab} setActiveTab={setActiveTab} />
 
-      {/* 6) A responsive grid for the filtered cards */}
-      <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredTours.map((item, idx) => (
-          <Card key={idx} data={item} />
-        ))}
+        {/* Responsive grid for the filtered cards */}
+        <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-items-center gap-4">
+          {filteredTours.map((item, idx) => (
+            <Card key={idx} data={item} />
+          ))}
+        </div>
       </div>
     </section>
   );
