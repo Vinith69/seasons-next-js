@@ -2,7 +2,18 @@ import { AiOutlineHeart, AiFillStar } from "react-icons/ai";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { MdOutlineCalendarToday } from "react-icons/md";
 
-export default function Card() {
+interface CardData {
+  category: string;
+  title: string;
+  location: string;
+  days: number;
+  oldPrice: number;
+  newPrice: number;
+  reviews: number;
+  image: string;
+}
+
+export default function Card({ data }: { data: CardData }) {
   return (
     <div className="relative w-full max-w-xs bg-white rounded-md shadow-sm overflow-hidden">
       {/* Top Section: Badge + Heart Icon + Image */}
@@ -17,44 +28,42 @@ export default function Card() {
           <AiOutlineHeart size={20} />
         </button>
 
-        {/* Image Placeholder */}
-        <img src="https://seasons.jdprojects.in/assets/img/listing/listing-2.jpg" alt="Tour" className="w-full h-auto" />
+        {/* Image */}
+        <img src={data.image} alt="Tour" className="w-full h-auto" />
       </div>
 
       {/* Content Area */}
       <div className="relative p-4 pb-14">
         {/* Card Title */}
-        <h3 className="text-[15px] font-semibold mb-1">When You Visit The Eternal Dubai City</h3>
+        <h3 className="text-[15px] font-semibold mb-1">{data.title}</h3>
 
         {/* Location & Duration */}
         <div className="flex flex-col items-start text-sm text-gray-500 space-x-2 mb-3">
           <div className="flex items-center space-x-1 mb-2">
             <HiOutlineLocationMarker size={14} />
-            <span>Dubai, Emirates</span>
+            <span>{data.location}</span>
           </div>
           <div className="flex items-center space-x-1">
             <MdOutlineCalendarToday size={14} />
-            <span>5 Days</span>
+            <span>{data.days} Days</span>
           </div>
         </div>
 
         {/* Angled Purple Shape for New Price */}
-        {/* Outer container is absolute so it can overlap the bottom-left corner. */}
         <div className="absolute left-0 bottom-0 h-10 w-[60%] bg-[url(https://seasons.jdprojects.in/assets/img/listing/angle-4.png)] bg-no-repeat overflow-hidden">
           {/* Price text on top of angled shape */}
           <div className="absolute inset-0 flex flex-col items-start justify-start ml-3">
             {/* Old Price (Strikethrough) */}
-            <div className="text-gray-400 text-sm line-through">$299</div>
+            <div className="text-gray-400 text-sm line-through">${data.oldPrice}</div>
             <span className="text-white text-sm font-semibold">
-              $149 <span className="text-xs">/Person</span>
+              ${data.newPrice} <span className="text-xs">/Person</span>
             </span>
           </div>
         </div>
 
         {/* Star Reviews on Bottom Right */}
         <div className="absolute bottom-2 right-2 flex items-center text-sm text-gray-500">
-          <AiFillStar className="text-yellow-500 mr-1" />
-          (5 Reviews)
+          <AiFillStar className="text-yellow-500 mr-1" />({data.reviews} Reviews)
         </div>
       </div>
     </div>
