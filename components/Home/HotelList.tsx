@@ -1,6 +1,7 @@
 "use client";
 import { useState, useMemo } from "react";
 import "./css/homepage.css";
+import Card from "../Common/Card";
 
 const tabs = [
   { name: "Tour", icon: "🚀" },
@@ -19,6 +20,7 @@ export default function HotelList() {
         <h2 className="text-4xl font-bold mb-4">Something Amazing Waiting For You</h2>
       </div>
       <TabComponent />
+      <Card />
     </section>
   );
 }
