@@ -4,7 +4,7 @@ import React from "react";
 
 const Discover = () => {
   return (
-    <section className="flex flex-col md:flex-row items-start  my-14 px-[4vw] lg:justify-center lg:px-0 text-[#020615]">
+    <section className="flex flex-col lg:flex-row items-start  my-14 px-[4vw] lg:justify-center lg:px-0 text-[#020615]">
       <div className="lg:max-w-[40vw]">
         <h5 className="capitalize font-bold text-lg text-[#560ce3] font-[caveat] mb-3">Dream Your Next Trip</h5>
         <h2 className="capitalize mb-4 text-3xl font-bold">
@@ -28,20 +28,20 @@ const Discover = () => {
         />
       </div>
 
-      <div className="flex flex-col justify-center items-center md:flex-row bg-amber-200  md:items-start lg:justify-center lg:max-w-[30vw] lg:relative ">
-        <Image
-          src={`https://seasons.jdprojects.in/assets/img/chose/chose.png`}
-          alt=""
-          width={406}
-          height={406}
-          className="my-6 mx-6 md:mt-0 lg:relative lg:top-[100px] lg:left-[200px]"
-        />
+      <div className="flex flex-col justify-center mx-auto items-center md:flex-row bg-amber-200  md:items-start lg:justify-center lg:max-w-[30vw] lg:relative ">
         <Image
           src={`https://seasons.jdprojects.in/assets/img/chose/chose-2.jpg`}
           alt=""
-          width={406}
-          height={406}
-          className="rounded-2xl mx-6 lg:relative lg:-left-12"
+          width={300}
+          height={300}
+          className="rounded-2xl mx-6 lg:mx-0 lg:relative  lg:left-1/2"
+        />
+        <Image
+          src={`https://seasons.jdprojects.in/assets/img/chose/chose.png`}
+          alt=""
+          width={300}
+          height={300}
+          className="my-6 mx-6 md:mt-0 lg:mx-0 lg:relative lg:top-[50px] lg:right-3/4"
         />
       </div>
     </section>
