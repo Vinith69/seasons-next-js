@@ -45,3 +45,15 @@
 } */
 
 /* ************************************************** Hotel section end************************************************* */
+
+/* ************************************************** Discover section ************************************************* */
+.discover-section {
+  background-image: url("https://seasons.jdprojects.in/assets/img/chose/chose-shape.png"),
+    url("https://seasons.jdprojects.in/assets/img/chose/chose-shape-2.png");
+  /* background-color: aqua; */
+
+  background-size: 8%, 20%;
+  background-position: center top, left bottom;
+  background-repeat: no-repeat, no-repeat;
+}
+/* ************************************************** Discover section end************************************************* */
