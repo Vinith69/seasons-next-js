@@ -94,9 +94,21 @@
 }
 
 /* For screens between 1200px and 1399px, reduce to 80px */
-@media (min-width: 1200px) and (max-width: 1399px) {
+@media (min-width: 1200px) {
   .tg-banner-2-big-title-h2 {
     font-size: 80px;
+  }
+}
+
+@media (min-width: 700px) and (max-width: 1200px) {
+  .tg-banner-2-big-title-h2 {
+    font-size: 50px;
+  }
+}
+
+@media (max-width: 700px) {
+  .tg-banner-2-big-title-h2 {
+    font-size: 25px;
   }
 }
 
