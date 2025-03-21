@@ -76,5 +76,28 @@
 }
 /* ************************************************** Banner section end************************************************* */
 /* ************************************************** Popular section ************************************************* */
+/* Large stroke text with shadow, uppercase, etc. */
+.tg-banner-2-big-title-h2 {
+  text-shadow: 0 5px 15px rgba(33, 120, 128, 0.278);
+  font-weight: 600;
+  font-size: 130px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-family: var(--tg-ff-chillax, sans-serif);
+  background-clip: inherit;
+
+  /* “Stroke” effect in WebKit browsers */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke-color: var(--tg-common-white, #fff);
+  -webkit-text-stroke-width: 2px;
+}
+
+/* For screens between 1200px and 1399px, reduce to 80px */
+@media (min-width: 1200px) and (max-width: 1399px) {
+  .tg-banner-2-big-title-h2 {
+    font-size: 80px;
+  }
+}
 
 /* ************************************************** Popular section end************************************************* */
