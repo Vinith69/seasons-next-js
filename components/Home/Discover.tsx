@@ -8,7 +8,7 @@ const Discover = () => {
     <section className="max-w-6xl mx-auto my-14 px-4 text-[#020615]">
       <div className="flex flex-col lg:flex-row lg:items-center gap-8">
         {/* LEFT: Text Content */}
-        <div className="lg:w-1/2">
+        <div className="lg:w-1/2 lg:mr-4">
           <h5 className="capitalize font-bold text-lg text-[#560ce3] font-[caveat] mb-3">Dream Your Next Trip</h5>
           <h2 className="capitalize mb-4 text-3xl font-bold">
             Discover When Even
@@ -32,7 +32,7 @@ const Discover = () => {
         </div>
 
         {/* RIGHT: Images */}
-        <div className="flex-1">
+        <div className="flex-1 lg:ml-4">
           {/* Mobile/Tablet: stacked images */}
           <div className="flex flex-col  items-center  space-y-6 md:flex-row md:mx-auto lg:hidden">
             <Image
@@ -61,7 +61,7 @@ const Discover = () => {
               className="rounded-2xl object-cover"
             />
             {/* Smaller Image (overlapped) */}
-            <div className="absolute top-1/2 -left-1/5 -translate-y-1/2">
+            <div className="absolute top-1/2 -left-1/6 -translate-y-1/2">
               <Image
                 src="https://seasons.jdprojects.in/assets/img/chose/chose.png"
                 alt="300x300"
