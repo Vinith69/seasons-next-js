@@ -5,14 +5,15 @@ const Banner = () => {
   return (
     <section className=" max-w-5xl md:max-h-64 mx-20 lg:mx-auto my-8 overflow-hidden rounded-xl shadow-md flex flex-col md:flex-row">
       {/* Left Side: Video Preview + Play Button */}
-      <div className="video-section relative bg-gray-300 w-full md:w-3/5 h-64 md:h-[230px] flex items-center justify-center">
-        {/* Play Button (pulsing) */}
+      <div className="video-section relative bg-gray-300 w-full md:w-3/5 h-64 md:h-[230px] flex items-center justify-center ">
+        {/* Pulsing thin ring */}
+        <span className="absolute inset-0 flex items-center justify-center">
+          <span className="block w-16 h-16 rounded-full border border-white opacity-75 animate-ping"></span>
+        </span>
+
         <button className="group absolute flex items-center justify-center cursor-pointer">
-          {/* The pulsing ring */}
-          <span className="absolute inline-flex h-16 w-16 rounded-full bg-purple-600 opacity-75 animate-ping" />
-          {/* The white circle behind the play icon */}
-          <span className="relative inline-flex h-16 w-16 rounded-full bg-white items-center justify-center text-purple-600">
-            <FaPlay />
+          <span className="relative inline-flex h-16 w-16 rounded-full bg-white items-center justify-center text-white">
+            <FaPlay color="#560ce3" />
           </span>
         </button>
       </div>

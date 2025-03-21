@@ -68,9 +68,10 @@
 
 .video-section {
   background-image: url("https://seasons.jdprojects.in/assets/img/banner/thumb.jpg");
+  outline: none;
 
-  background-size: 100%;
-  /* background-position: bottom right; */
+  background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
 }
 /* ************************************************** Banner section end************************************************* */
