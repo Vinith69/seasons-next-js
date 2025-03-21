@@ -6,6 +6,7 @@ import AboutUs from "@/components/Home/AboutUs";
 import HotelList from "@/components/Home/HotelList";
 import Discover from "@/components/Home/Discover";
 import Banner from "@/components/Home/Banner";
+import PopularTour from "@/components/Home/PopularTour";
 
 export default function Home() {
   return (
@@ -48,6 +49,7 @@ export default function Home() {
         <HotelList />
         <Discover />
         <Banner />
+        <PopularTour />
       </main>
     </>
   );
