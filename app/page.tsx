@@ -5,6 +5,7 @@ import SearchBox from "@/components/SearchBox";
 import AboutUs from "@/components/Home/AboutUs";
 import HotelList from "@/components/Home/HotelList";
 import Discover from "@/components/Home/Discover";
+import Banner from "@/components/Home/Banner";
 
 export default function Home() {
   return (
@@ -46,6 +47,7 @@ export default function Home() {
         <AboutUs />
         <HotelList />
         <Discover />
+        <Banner />
       </main>
     </>
   );

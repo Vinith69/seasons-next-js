@@ -57,3 +57,20 @@
   background-repeat: no-repeat, no-repeat;
 }
 /* ************************************************** Discover section end************************************************* */
+/* ************************************************** Banner section ************************************************* */
+.promo-section {
+  background-image: url("https://seasons.jdprojects.in/assets/img/banner/shape.png");
+
+  background-size: 35%;
+  background-position: bottom right;
+  background-repeat: no-repeat;
+}
+
+.video-section {
+  background-image: url("https://seasons.jdprojects.in/assets/img/banner/thumb.jpg");
+
+  background-size: 100%;
+  /* background-position: bottom right; */
+  background-repeat: no-repeat;
+}
+/* ************************************************** Banner section end************************************************* */
