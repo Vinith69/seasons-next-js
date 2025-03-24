@@ -1,44 +1,52 @@
 "use client";
+
 import React, { useState } from "react";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import Image from "@tiptap/extension-image";
-import Link from "@tiptap/extension-link";
+import Placeholder from "@tiptap/extension-placeholder";
 import Underline from "@tiptap/extension-underline";
 import TextAlign from "@tiptap/extension-text-align";
+import Link from "@tiptap/extension-link";
+import Image from "@tiptap/extension-image";
 import Heading from "@tiptap/extension-heading";
-import Placeholder from "@tiptap/extension-placeholder";
+import {
+  MdFormatBold,
+  MdFormatItalic,
+  MdFormatUnderlined,
+  MdStrikethroughS,
+  MdFormatListBulleted,
+  MdFormatListNumbered,
+  MdFormatQuote,
+  MdFormatAlignLeft,
+  MdFormatAlignCenter,
+  MdFormatAlignRight,
+  MdFormatAlignJustify,
+  MdInsertLink,
+  MdInsertPhoto,
+} from "react-icons/md";
 
-export default function ProfessionalEditor() {
+export default function ModernEditor() {
   const editor = useEditor({
     extensions: [
       StarterKit,
       Underline,
-      Link.configure({
-        openOnClick: false,
-      }),
+      Link.configure({ openOnClick: false }),
       Image,
-      Heading.configure({
-        levels: [1, 2, 3, 4, 5, 6],
-      }),
-      TextAlign.configure({
-        types: ["heading", "paragraph"],
-      }),
+      Heading.configure({ levels: [1, 2, 3, 4, 5, 6] }),
+      TextAlign.configure({ types: ["heading", "paragraph"] }),
       Placeholder.configure({
         placeholder: "Start typing your content here…",
       }),
     ],
-    // content: "",
-    // content: `
-
-    // `,
+    // Make sure the editor starts empty so the placeholder is visible:
+    content: "",
   });
 
   const [linkUrl, setLinkUrl] = useState("");
 
   if (!editor) return null;
 
-  // Minimal function for inserting images by URL
+  // Insert image by URL
   const handleAddImage = () => {
     const url = prompt("Enter image URL");
     if (url) {
@@ -46,7 +54,7 @@ export default function ProfessionalEditor() {
     }
   };
 
-  // Minimal function for inserting links
+  // Insert or set link
   const handleSetLink = () => {
     if (!linkUrl) return;
     editor.chain().focus().extendMarkRange("link").setLink({ href: linkUrl }).run();
@@ -68,28 +76,32 @@ export default function ProfessionalEditor() {
 
   return (
     <div className="mx-auto max-w-3xl p-4 bg-white border border-gray-200 rounded-md shadow-sm">
-      {/* Title */}
       <h1 className="text-2xl font-bold mb-4 text-gray-800">Professional Editor</h1>
 
       {/* Toolbar */}
       <div className="flex flex-wrap items-center gap-2 mb-4">
-        <ToolbarButton onClick={() => editor.chain().focus().toggleBold().run()} active={editor.isActive("bold")}>
-          B
-        </ToolbarButton>
+        <ToolbarButton
+          onClick={() => editor.chain().focus().toggleBold().run()}
+          active={editor.isActive("bold")}
+          icon={<MdFormatBold />}
+        />
+        <ToolbarButton
+          onClick={() => editor.chain().focus().toggleItalic().run()}
+          active={editor.isActive("italic")}
+          icon={<MdFormatItalic />}
+        />
+        <ToolbarButton
+          onClick={() => editor.chain().focus().toggleUnderline().run()}
+          active={editor.isActive("underline")}
+          icon={<MdFormatUnderlined />}
+        />
+        <ToolbarButton
+          onClick={() => editor.chain().focus().toggleStrike().run()}
+          active={editor.isActive("strike")}
+          icon={<MdStrikethroughS />}
+        />
 
-        <ToolbarButton onClick={() => editor.chain().focus().toggleItalic().run()} active={editor.isActive("italic")}>
-          I
-        </ToolbarButton>
-
-        <ToolbarButton onClick={() => editor.chain().focus().toggleUnderline().run()} active={editor.isActive("underline")}>
-          U
-        </ToolbarButton>
-
-        <ToolbarButton onClick={() => editor.chain().focus().toggleStrike().run()} active={editor.isActive("strike")}>
-          S
-        </ToolbarButton>
-
-        {/* Heading dropdown */}
+        {/* Heading Dropdown */}
         <select
           onChange={(e) => handleHeadingChange(parseInt(e.target.value, 10))}
           className="border border-gray-300 px-2 py-1 rounded text-sm focus:outline-none"
@@ -103,71 +115,70 @@ export default function ProfessionalEditor() {
           <option value="6">H6</option>
         </select>
 
-        <ToolbarButton onClick={() => editor.chain().focus().toggleBulletList().run()} active={editor.isActive("bulletList")}>
-          • List
-        </ToolbarButton>
-        <ToolbarButton onClick={() => editor.chain().focus().toggleOrderedList().run()} active={editor.isActive("orderedList")}>
-          1. List
-        </ToolbarButton>
-        <ToolbarButton onClick={() => editor.chain().focus().toggleBlockquote().run()} active={editor.isActive("blockquote")}>
-          “ ”
-        </ToolbarButton>
+        <ToolbarButton
+          onClick={() => editor.chain().focus().toggleBulletList().run()}
+          active={editor.isActive("bulletList")}
+          icon={<MdFormatListBulleted />}
+        />
+        <ToolbarButton
+          onClick={() => editor.chain().focus().toggleOrderedList().run()}
+          active={editor.isActive("orderedList")}
+          icon={<MdFormatListNumbered />}
+        />
+        <ToolbarButton
+          onClick={() => editor.chain().focus().toggleBlockquote().run()}
+          active={editor.isActive("blockquote")}
+          icon={<MdFormatQuote />}
+        />
 
         {/* Alignment */}
         <ToolbarButton
           onClick={() => editor.chain().focus().setTextAlign("left").run()}
           active={editor.isActive({ textAlign: "left" })}
-        >
-          L
-        </ToolbarButton>
+          icon={<MdFormatAlignLeft />}
+        />
         <ToolbarButton
           onClick={() => editor.chain().focus().setTextAlign("center").run()}
           active={editor.isActive({ textAlign: "center" })}
-        >
-          C
-        </ToolbarButton>
+          icon={<MdFormatAlignCenter />}
+        />
         <ToolbarButton
           onClick={() => editor.chain().focus().setTextAlign("right").run()}
           active={editor.isActive({ textAlign: "right" })}
-        >
-          R
-        </ToolbarButton>
+          icon={<MdFormatAlignRight />}
+        />
         <ToolbarButton
           onClick={() => editor.chain().focus().setTextAlign("justify").run()}
           active={editor.isActive({ textAlign: "justify" })}
-        >
-          J
-        </ToolbarButton>
-
-        {/* Link */}
-        <input
-          type="text"
-          placeholder="Link..."
-          value={linkUrl}
-          onChange={(e) => setLinkUrl(e.target.value)}
-          className="border border-gray-300 px-2 py-1 rounded text-sm outline-none focus:outline-none w-24"
+          icon={<MdFormatAlignJustify />}
         />
-        <button onClick={handleSetLink} className="bg-gray-100 px-3 py-1 rounded hover:bg-gray-200 text-sm text-gray-600">
-          Link
-        </button>
-        <ToolbarButton onClick={() => editor.chain().focus().unsetLink().run()} active={editor.isActive("link")}>
-          Unlink
-        </ToolbarButton>
+
+        {/* Link input + button */}
+        <div className="flex items-center space-x-1">
+          <input
+            type="text"
+            placeholder="Link..."
+            value={linkUrl}
+            onChange={(e) => setLinkUrl(e.target.value)}
+            className="border border-gray-300 px-2 py-1 rounded text-sm outline-none focus:outline-none w-24"
+          />
+          <ToolbarButton onClick={handleSetLink} icon={<MdInsertLink />} />
+          <ToolbarButton
+            onClick={() => editor.chain().focus().unsetLink().run()}
+            active={editor.isActive("link")}
+            icon={<span>Unlink</span>}
+          />
+        </div>
 
         {/* Image */}
-        <button onClick={handleAddImage} className="bg-orange-100 px-3 py-1 rounded hover:bg-orange-200 text-sm text-gray-600">
-          Image
-        </button>
+        <ToolbarButton onClick={handleAddImage} icon={<MdInsertPhoto />} />
       </div>
 
-      {/* Editable Area (no outline, resizable) */}
+      {/* Editable Area */}
       <div className="relative">
         <EditorContent
           editor={editor}
-          //   placeholder="Hiii"
-          //       placeholder={` <h2>Welcome to Your Blog Editor</h2>
-          //   <p>Start writing your content here...</p>`}
-          className="min-h-[200px] resize-y overflow-auto focus:outline-none outline p-3 border border-gray-200 rounded"
+          className="ProseMirror min-h-[200px] resize-y overflow-auto p-3 border border-gray-200 rounded focus:outline-none"
         />
       </div>
 
@@ -184,26 +195,23 @@ export default function ProfessionalEditor() {
   );
 }
 
-/**
- * Reusable toolbar button.
- * Changes style if 'active' is true.
- */
+/** Reusable toolbar button with icons. */
 interface ToolbarButtonProps {
-  children: React.ReactNode;
   onClick: () => void;
   active?: boolean;
+  icon: React.ReactNode;
 }
 
-function ToolbarButton({ children, onClick, active }: ToolbarButtonProps) {
+function ToolbarButton({ onClick, active, icon }: ToolbarButtonProps) {
   return (
     <button
       onClick={onClick}
       className={`${
         active ? "bg-purple-600 text-white" : "bg-gray-100 text-gray-700"
-      } px-3 py-1 rounded hover:bg-gray-200 text-sm font-medium transition-colors duration-300`}
+      } flex items-center justify-center w-8 h-8 rounded hover:bg-gray-200 text-sm font-medium transition-colors duration-300`}
       style={{ minWidth: "36px", textAlign: "center" }}
     >
-      {children}
+      {icon}
     </button>
   );
 }

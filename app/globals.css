@@ -17,3 +17,8 @@ body {
   color: var(--foreground);
   font-family: poppins, sans-serif;
 }
+
+.ProseMirror:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
