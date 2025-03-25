@@ -1,25 +1,17 @@
-// pages/api/blog.ts
-import type { NextApiRequest, NextApiResponse } from "next";
-import clientPromise from "../../../lib/mongodb";
+// app/api/blog/route.ts
+import { NextResponse } from "next/server";
+import clientPromise from "@/lib/mongodb";
 
-interface BlogPost {
-  title: string;
-  read: string;
-  imageUrl: string;
-  content: string;
-  createdAt: Date;
-}
+export async function POST(request: Request) {
+  try {
+    const { title, read, imageUrl, content } = await request.json();
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method === "POST") {
-    const { title, read, imageUrl, content } = req.body;
-
+    // Validate required fields
     if (!title || !read || !imageUrl || !content) {
-      res.status(400).json({ error: "Missing required fields" });
-      return;
+      return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
 
-    const blogPost: BlogPost = {
+    const blogPost = {
       title,
       read,
       imageUrl,
@@ -27,19 +19,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       createdAt: new Date(),
     };
 
-    try {
-      const client = await clientPromise;
-      const db = client.db(); // uses the default database specified in the URI
-      const result = await db.collection("posts").insertOne(blogPost);
+    const client = await clientPromise;
+    const db = client.db(); // Uses the default database specified in your URI
+    const result = await db.collection("posts").insertOne(blogPost);
 
-      // MongoDB automatically generates an _id for the document
-      res.status(201).json({ message: "Blog post created", postId: result.insertedId });
-    } catch (error) {
-      console.error("Error inserting blog post:", error);
-      res.status(500).json({ error: "Failed to create blog post" });
-    }
-  } else {
-    res.setHeader("Allow", ["POST"]);
-    res.status(405).json({ error: `Method ${req.method} not allowed` });
+    return NextResponse.json({ message: "Blog post created", postId: result.insertedId }, { status: 201 });
+  } catch (error) {
+    console.error("Error inserting blog post:", error);
+    return NextResponse.json({ error: "Failed to create blog post" }, { status: 500 });
   }
 }

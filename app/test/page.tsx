@@ -9,6 +9,7 @@ import TextAlign from "@tiptap/extension-text-align";
 import Link from "@tiptap/extension-link";
 import Image from "@tiptap/extension-image";
 import Heading from "@tiptap/extension-heading";
+
 import {
   MdFormatBold,
   MdFormatItalic,
@@ -24,6 +25,26 @@ import {
   MdInsertPhoto,
 } from "react-icons/md";
 
+interface ToolbarButtonProps {
+  onClick: () => void;
+  active?: boolean;
+  icon: React.ReactNode;
+}
+
+function ToolbarButton({ onClick, active, icon }: ToolbarButtonProps) {
+  return (
+    <button
+      onClick={onClick}
+      className={`${
+        active ? "bg-purple-600 text-white" : "bg-gray-100 text-gray-700"
+      } flex items-center justify-center w-8 h-8 rounded hover:bg-gray-200 text-sm font-medium transition-colors duration-300`}
+      style={{ minWidth: "36px", textAlign: "center" }}
+    >
+      {icon}
+    </button>
+  );
+}
+
 export default function ProfessionalEditor() {
   const editor = useEditor({
     extensions: [
@@ -38,19 +59,24 @@ export default function ProfessionalEditor() {
       }),
     ],
     content: "<p></p>",
+    parseOptions: {
+      preserveWhitespace: true, // or true, depending on your needs
+    },
   });
 
-  const [linkUrl, setLinkUrl] = useState("");
+  const [linkUrl, setLinkUrl] = useState<string>("");
+  const [title, setTitle] = useState<string>("");
+  const [read, setRead] = useState<string>("");
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   if (!editor) return null;
 
-  // Handler for selecting a file locally
+  // Handler for local image selection
   const handleLocalImageSelect = () => {
     fileInputRef.current?.click();
   };
 
-  // Handler for uploading file to your server
+  // Handler for uploading image file to your server
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (files && files[0]) {
@@ -71,8 +97,7 @@ export default function ProfessionalEditor() {
 
         const data = await response.json();
         // Assume your API returns { url: "https://yourserver.com/path/to/image.jpg" }
-        const imageUrl = data.url;
-        // Insert the image into the editor
+        const imageUrl: string = data.url;
         editor.chain().focus().setImage({ src: imageUrl }).run();
       } catch (error) {
         console.error("Image upload error:", error);
@@ -98,9 +123,62 @@ export default function ProfessionalEditor() {
     }
   };
 
+  const saveBlogPost = async () => {
+    let editorContent = editor.getHTML();
+
+    // 🔹 Remove completely empty <p> tags or replace them with <br>
+    editorContent = editorContent
+      .replace(/<p>\s*<\/p>/g, "<br/>") // Removes empty <p> tags
+      .replace(/<p>(&nbsp;|\s)*<\/p>/g, "<br/>"); // Removes <p> with only spaces or &nbsp;
+
+    // console.log("Processed Content:", editorContent); // Debugging
+
+    const blogData = {
+      title,
+      read,
+      imageUrl: linkUrl,
+      content: editorContent,
+    };
+
+    try {
+      const response = await fetch("/api/blog", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(blogData),
+      });
+
+      const result = await response.json();
+      console.log("Blog post saved:", result);
+    } catch (error) {
+      console.error("Error saving blog post:", error);
+    }
+  };
+
   return (
     <div className="mx-auto max-w-3xl p-4 bg-white border border-gray-200 rounded-md shadow-sm">
       <h1 className="text-2xl font-bold mb-4 text-gray-800">Professional Editor</h1>
+
+      {/* Title Input */}
+      <div className="mb-4">
+        <input
+          type="text"
+          placeholder="Enter blog title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          className="border border-gray-300 px-2 py-1 rounded w-full"
+        />
+      </div>
+
+      {/* Read Time / Description Input */}
+      <div className="mb-4">
+        <input
+          type="text"
+          placeholder="Enter read time or description (e.g. '3 min read')"
+          value={read}
+          onChange={(e) => setRead(e.target.value)}
+          className="border border-gray-300 px-2 py-1 rounded w-full"
+        />
+      </div>
 
       {/* Toolbar */}
       <div className="flex flex-wrap items-center gap-2 mb-4">
@@ -177,41 +255,24 @@ export default function ProfessionalEditor() {
           icon={<MdFormatAlignJustify />}
         />
 
-        {/* Link input and buttons */}
-        {/* <div className="flex items-center space-x-1">
-          <input
-            type="text"
-            placeholder="Link..."
-            value={linkUrl}
-            onChange={(e) => setLinkUrl(e.target.value)}
-            className="border border-gray-300 px-2 py-1 rounded text-sm outline-none focus:outline-none w-24"
-          />
-          <ToolbarButton onClick={handleSetLink} active={editor.isActive("link")} icon={<MdInsertLink />} />
-          <ToolbarButton
-            onClick={() => editor.chain().focus().unsetLink().run()}
-            active={editor.isActive("link")}
-            icon={<span>Unlink</span>}
-          />
-        </div> */}
-
         {/* Image Upload Button */}
         <ToolbarButton onClick={handleLocalImageSelect} icon={<MdInsertPhoto />} />
         {/* Hidden file input for local image upload */}
         <input ref={fileInputRef} type="file" accept="image/*" onChange={handleFileChange} className="hidden" />
       </div>
 
-      {/* Image link  */}
-      <div className="relative">
+      {/* Image Link Input */}
+      <div className="relative mb-4">
         <input
           type="text"
           placeholder="Please attach your image link here"
           value={linkUrl}
           onChange={(e) => setLinkUrl(e.target.value)}
-          className="border border-gray-300 px-2 py-1 rounded text-sm outline-none focus:outline-none mb-4 w-72 lg:w-96"
+          className="border border-gray-300 px-2 py-1 rounded text-sm outline-none focus:outline-none w-72 lg:w-96"
         />
       </div>
 
-      {/* Editable Area */}
+      {/* Editor Content */}
       <div className="relative">
         <EditorContent
           editor={editor}
@@ -222,33 +283,12 @@ export default function ProfessionalEditor() {
       {/* Save Button */}
       <div className="mt-4 text-right">
         <button
-          onClick={() => console.log("Blog content:", editor.getHTML())}
+          onClick={saveBlogPost}
           className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-6 py-2 rounded-full shadow hover:opacity-90 transition-all"
         >
           Save Blog
         </button>
       </div>
     </div>
-  );
-}
-
-/** Reusable toolbar button with icons. */
-interface ToolbarButtonProps {
-  onClick: () => void;
-  active?: boolean;
-  icon: React.ReactNode;
-}
-
-function ToolbarButton({ onClick, active, icon }: ToolbarButtonProps) {
-  return (
-    <button
-      onClick={onClick}
-      className={`${
-        active ? "bg-purple-600 text-white" : "bg-gray-100 text-gray-700"
-      } flex items-center justify-center w-8 h-8 rounded hover:bg-gray-200 text-sm font-medium transition-colors duration-300`}
-      style={{ minWidth: "36px", textAlign: "center" }}
-    >
-      {icon}
-    </button>
   );
 }
