@@ -3,13 +3,19 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   /* config options here */
   images: {
+    // domains: ["drive.google.com"],
+
     remotePatterns: [
       {
         protocol: "https",
         hostname: "seasons.jdprojects.in",
         port: "",
         pathname: "**",
-        search: "",
+      },
+      {
+        protocol: "https",
+        hostname: "drive.google.com",
+        pathname: "**",
       },
     ],
   },

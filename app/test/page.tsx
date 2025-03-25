@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Placeholder from "@tiptap/extension-placeholder";
@@ -21,11 +21,10 @@ import {
   MdFormatAlignCenter,
   MdFormatAlignRight,
   MdFormatAlignJustify,
-  MdInsertLink,
   MdInsertPhoto,
 } from "react-icons/md";
 
-export default function ModernEditor() {
+export default function ProfessionalEditor() {
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -38,30 +37,55 @@ export default function ModernEditor() {
         placeholder: "Start typing your content here…",
       }),
     ],
-    // Make sure the editor starts empty so the placeholder is visible:
-    content: "",
+    content: "<p></p>",
   });
 
   const [linkUrl, setLinkUrl] = useState("");
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   if (!editor) return null;
 
-  // Insert image by URL
-  const handleAddImage = () => {
-    const url = prompt("Enter image URL");
-    if (url) {
-      editor.chain().focus().setImage({ src: url }).run();
+  // Handler for selecting a file locally
+  const handleLocalImageSelect = () => {
+    fileInputRef.current?.click();
+  };
+
+  // Handler for uploading file to your server
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (files && files[0]) {
+      const file = files[0];
+      const formData = new FormData();
+      formData.append("file", file);
+
+      try {
+        // Replace '/api/upload' with your actual upload endpoint
+        const response = await fetch("/api/upload", {
+          method: "POST",
+          body: formData,
+        });
+
+        if (!response.ok) {
+          throw new Error("Upload failed");
+        }
+
+        const data = await response.json();
+        // Assume your API returns { url: "https://yourserver.com/path/to/image.jpg" }
+        const imageUrl = data.url;
+        // Insert the image into the editor
+        editor.chain().focus().setImage({ src: imageUrl }).run();
+      } catch (error) {
+        console.error("Image upload error:", error);
+      }
     }
   };
 
-  // Insert or set link
   const handleSetLink = () => {
     if (!linkUrl) return;
     editor.chain().focus().extendMarkRange("link").setLink({ href: linkUrl }).run();
     setLinkUrl("");
   };
 
-  // Heading selection
   const handleHeadingChange = (level: number) => {
     if (level === 0) {
       editor.chain().focus().setParagraph().run();
@@ -153,8 +177,8 @@ export default function ModernEditor() {
           icon={<MdFormatAlignJustify />}
         />
 
-        {/* Link input + button */}
-        <div className="flex items-center space-x-1">
+        {/* Link input and buttons */}
+        {/* <div className="flex items-center space-x-1">
           <input
             type="text"
             placeholder="Link..."
@@ -162,16 +186,29 @@ export default function ModernEditor() {
             onChange={(e) => setLinkUrl(e.target.value)}
             className="border border-gray-300 px-2 py-1 rounded text-sm outline-none focus:outline-none w-24"
           />
-          <ToolbarButton onClick={handleSetLink} icon={<MdInsertLink />} />
+          <ToolbarButton onClick={handleSetLink} active={editor.isActive("link")} icon={<MdInsertLink />} />
           <ToolbarButton
             onClick={() => editor.chain().focus().unsetLink().run()}
             active={editor.isActive("link")}
             icon={<span>Unlink</span>}
           />
-        </div>
+        </div> */}
 
-        {/* Image */}
-        <ToolbarButton onClick={handleAddImage} icon={<MdInsertPhoto />} />
+        {/* Image Upload Button */}
+        <ToolbarButton onClick={handleLocalImageSelect} icon={<MdInsertPhoto />} />
+        {/* Hidden file input for local image upload */}
+        <input ref={fileInputRef} type="file" accept="image/*" onChange={handleFileChange} className="hidden" />
+      </div>
+
+      {/* Image link  */}
+      <div className="relative">
+        <input
+          type="text"
+          placeholder="Please attach your image link here"
+          value={linkUrl}
+          onChange={(e) => setLinkUrl(e.target.value)}
+          className="border border-gray-300 px-2 py-1 rounded text-sm outline-none focus:outline-none mb-4 w-72 lg:w-96"
+        />
       </div>
 
       {/* Editable Area */}
