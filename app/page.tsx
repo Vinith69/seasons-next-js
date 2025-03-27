@@ -7,6 +7,7 @@ import HotelList from "@/components/Home/HotelList";
 import Discover from "@/components/Home/Discover";
 import Banner from "@/components/Home/Banner";
 import PopularTour from "@/components/Home/PopularTour";
+import ClientFeedBack from "@/components/Home/ClientFeedBack";
 
 export default function Home() {
   return (
@@ -50,6 +51,7 @@ export default function Home() {
         <Discover />
         <Banner />
         <PopularTour />
+        <ClientFeedBack />
       </main>
     </>
   );
