@@ -8,6 +8,7 @@ import Discover from "@/components/Home/Discover";
 import Banner from "@/components/Home/Banner";
 import PopularTour from "@/components/Home/PopularTour";
 import ClientFeedBack from "@/components/Home/ClientFeedBack";
+import BlogAndArticle from "@/components/Home/BlogAndArticle";
 
 export default function Home() {
   return (
@@ -52,6 +53,7 @@ export default function Home() {
         <Banner />
         <PopularTour />
         <ClientFeedBack />
+        <BlogAndArticle />
       </main>
     </>
   );
